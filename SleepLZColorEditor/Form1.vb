@@ -2,29 +2,32 @@
 
 Public Class Form1
     'Top screen color values
-    Public TopBack As String
-    Public TopBackGlow As String
-    Public TopStripes As String
-    Public TopHeader As String
-    Public TopText As String
-    Public TopFooter As String
-    Public TopLine As String
+    Public TopBack As String = "FFFFFF"
+    Public TopBackGlow As String = "FFFFFF"
+    Public TopStripes As String = "FFFFFF"
+    Public TopHeader As String = "FFFFFF"
+    Public TopText As String = "FFFFFF"
+    Public TopFooter As String = "FFFFFF"
+    Public TopLine As String = "FFFFFF"
 
     'Bottom screen color values
-    Public ButtonText
-    Public ButtonTextMask
-    Public ButtonColor
-    Public ButtonGlow
-    Public BottomBack
-    Public BottomBackGlow
-    Public BottomStripes
-    Public BottomMask
-    Public BottomText
-    Public BottomFooter
-    Public BottomLine
+    Public ButtonText As String = "FFFFFF"
+    Public ButtonTextMask As String = "FFFFFF"
+    Public ButtonColor As String = "FFFFFF"
+    Public ButtonGlow As String = "FFFFFF"
+    Public BottomBack As String = "FFFFFF"
+    Public BottomBackGlow As String = "FFFFFF"
+    Public BottomStripes As String = "FFFFFF"
+    Public BottomMask As String = "FFFFFF"
+    Public BottomText As String = "FFFFFF"
+    Public BottomFooter As String = "FFFFFF"
+    Public BottomLine As String = "FFFFFF"
 
     'sleep_LZ.bin.bin being edited
     Public editfile As String
+
+    'theme file being opened for processing
+    Public themefile As String
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
@@ -56,27 +59,7 @@ Public Class Form1
             BottomFooter = ReadColor(&H122C)
             BottomLine = ReadColor(&H1554)
 
-            'Change color previews
-            '   Top Screen
-            clrTopBack.BackColor = StrToClr(TopBack)
-            clrTopBackGlow.BackColor = StrToClr(TopBackGlow)
-            clrTopStripes.BackColor = StrToClr(TopStripes)
-            clrTopHeader.BackColor = StrToClr(TopHeader)
-            clrTopText.BackColor = StrToClr(TopText)
-            clrTopFooter.BackColor = StrToClr(TopFooter)
-            clrTopLine.BackColor = StrToClr(TopLine)
-            '   Bottom Screen
-            clrButtonText.BackColor = StrToClr(ButtonText)
-            clrButtonTextMask.BackColor = StrToClr(ButtonTextMask)
-            clrButtonColor.BackColor = StrToClr(ButtonColor)
-            clrButtonGlow.BackColor = StrToClr(ButtonGlow)
-            clrBottomBack.BackColor = StrToClr(BottomBack)
-            clrBottomBackGlow.BackColor = StrToClr(BottomBackGlow)
-            clrBottomStripes.BackColor = StrToClr(BottomStripes)
-            clrBottomMask.BackColor = StrToClr(BottomMask)
-            clrBottomText.BackColor = StrToClr(BottomText)
-            clrBottomFooter.BackColor = StrToClr(BottomFooter)
-            clrBottomLine.BackColor = StrToClr(BottomLine)
+            SetColors()
         End If
     End Sub
 
@@ -113,7 +96,7 @@ Public Class Form1
     '----------Color chaniging block----------
     Private Sub btnTopBack_Click(sender As Object, e As EventArgs) Handles btnTopBack.Click
         ColorDialog1.Color = clrTopBack.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrTopBack.BackColor = c
             TopBack = ColorToHex(c)
@@ -122,7 +105,7 @@ Public Class Form1
 
     Private Sub btnTopBackGlow_Click(sender As Object, e As EventArgs) Handles btnTopBackGlow.Click
         ColorDialog1.Color = clrTopBackGlow.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrTopBackGlow.BackColor = c
             TopBackGlow = ColorToHex(c)
@@ -131,7 +114,7 @@ Public Class Form1
 
     Private Sub btnTopStripes_Click(sender As Object, e As EventArgs) Handles btnTopStripes.Click
         ColorDialog1.Color = clrTopStripes.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrTopStripes.BackColor = c
             TopStripes = ColorToHex(c)
@@ -140,7 +123,7 @@ Public Class Form1
 
     Private Sub btnTopHeader_Click(sender As Object, e As EventArgs) Handles btnTopHeader.Click
         ColorDialog1.Color = clrTopHeader.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrTopHeader.BackColor = c
             TopHeader = ColorToHex(c)
@@ -149,7 +132,7 @@ Public Class Form1
 
     Private Sub btnTopText_Click(sender As Object, e As EventArgs) Handles btnTopText.Click
         ColorDialog1.Color = clrTopText.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrTopText.BackColor = c
             TopText = ColorToHex(c)
@@ -158,7 +141,7 @@ Public Class Form1
 
     Private Sub btnTopFooter_Click(sender As Object, e As EventArgs) Handles btnTopFooter.Click
         ColorDialog1.Color = clrTopFooter.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrTopFooter.BackColor = c
             TopFooter = ColorToHex(c)
@@ -167,7 +150,7 @@ Public Class Form1
 
     Private Sub btnTopLine_Click(sender As Object, e As EventArgs) Handles btnTopLine.Click
         ColorDialog1.Color = clrTopLine.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrTopLine.BackColor = c
             TopLine = ColorToHex(c)
@@ -176,7 +159,7 @@ Public Class Form1
 
     Private Sub btnBottomBack_Click(sender As Object, e As EventArgs) Handles btnBottomBack.Click
         ColorDialog1.Color = clrBottomBack.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrBottomBack.BackColor = c
             BottomBack = ColorToHex(c)
@@ -185,7 +168,7 @@ Public Class Form1
 
     Private Sub btnBottomBackGlow_Click(sender As Object, e As EventArgs) Handles btnBottomBackGlow.Click
         ColorDialog1.Color = clrBottomBackGlow.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrBottomBackGlow.BackColor = c
             BottomBackGlow = ColorToHex(c)
@@ -194,7 +177,7 @@ Public Class Form1
 
     Private Sub btnBottomStripes_Click(sender As Object, e As EventArgs) Handles btnBottomStripes.Click
         ColorDialog1.Color = clrBottomStripes.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrBottomStripes.BackColor = c
             BottomStripes = ColorToHex(c)
@@ -203,7 +186,7 @@ Public Class Form1
 
     Private Sub btnBottomMask_Click(sender As Object, e As EventArgs) Handles btnBottomMask.Click
         ColorDialog1.Color = clrBottomMask.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrBottomMask.BackColor = c
             BottomMask = ColorToHex(c)
@@ -212,7 +195,7 @@ Public Class Form1
 
     Private Sub btnBottomText_Click(sender As Object, e As EventArgs) Handles btnBottomText.Click
         ColorDialog1.Color = clrBottomText.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrBottomText.BackColor = c
             BottomText = ColorToHex(c)
@@ -221,7 +204,7 @@ Public Class Form1
 
     Private Sub btnBottomFooter_Click(sender As Object, e As EventArgs) Handles btnBottomFooter.Click
         ColorDialog1.Color = clrBottomFooter.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrBottomFooter.BackColor = c
             BottomFooter = ColorToHex(c)
@@ -230,7 +213,7 @@ Public Class Form1
 
     Private Sub btnBottomLine_Click(sender As Object, e As EventArgs) Handles btnBottomLine.Click
         ColorDialog1.Color = clrBottomLine.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrBottomLine.BackColor = c
             BottomLine = ColorToHex(c)
@@ -239,7 +222,7 @@ Public Class Form1
 
     Private Sub btnButtonText_Click(sender As Object, e As EventArgs) Handles btnButtonText.Click
         ColorDialog1.Color = clrButtonText.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrButtonText.BackColor = c
             ButtonText = ColorToHex(c)
@@ -248,7 +231,7 @@ Public Class Form1
 
     Private Sub btnButtonTextMask_Click(sender As Object, e As EventArgs) Handles btnButtonTextMask.Click
         ColorDialog1.Color = clrButtonTextMask.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrButtonTextMask.BackColor = c
             ButtonTextMask = ColorToHex(c)
@@ -257,7 +240,7 @@ Public Class Form1
 
     Private Sub btnButtonColor_Click(sender As Object, e As EventArgs) Handles btnButtonColor.Click
         ColorDialog1.Color = clrButtonColor.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrButtonColor.BackColor = c
             ButtonColor = ColorToHex(c)
@@ -266,7 +249,7 @@ Public Class Form1
 
     Private Sub btnButtonGlow_Click(sender As Object, e As EventArgs) Handles btnButtonGlow.Click
         ColorDialog1.Color = clrButtonGlow.BackColor
-        If ColorDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ColorDialog1.ShowDialog() = DialogResult.OK Then
             Dim c As Color = ColorDialog1.Color
             clrButtonGlow.BackColor = c
             ButtonGlow = ColorToHex(c)
@@ -274,6 +257,60 @@ Public Class Form1
     End Sub
     '----------End color change block----------
 
+
+    '----------Color Save/Read Block----------
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If SaveFileDialog1.ShowDialog = DialogResult.OK Then
+            Dim savefile As String = SaveFileDialog1.FileName
+            'If Not File.Exists(savefile) Then
+
+            'Else
+            '    Dim fs As New IO.FileStream(savefile, FileMode.Open, FileAccess.ReadWrite)
+            'End If
+            Dim fs As IO.FileStream = File.Create(savefile)
+            Dim strHex As String = TopBack & TopBackGlow & TopStripes & TopHeader & TopText & TopFooter & TopLine & ButtonText & ButtonTextMask & ButtonColor & ButtonGlow & BottomBack & BottomBackGlow & BottomStripes & BottomMask & BottomText & BottomFooter & BottomLine & "FFFFFFABCDEF"
+
+            fs.Position = 0
+            For j As Integer = 0 To strHex.Length - 1 Step 2
+                fs.WriteByte(CByte(Conversion.Val("&H" & strHex.Substring(j, 2))))
+            Next
+
+            fs.Close()
+            fs.Dispose()
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If OpenThemeDialog.ShowDialog = DialogResult.OK Then
+            themefile = OpenThemeDialog.FileName
+            Dim themeInfo As New FileInfo(themefile)
+            If Hex(Convert.ToInt32(themeInfo.Length) - 1) = "3B" And ReadFile(&H36) = "FFFFFF" And ReadFile(&H39) = "ABCDEF" Then
+                TopBack = ReadFile(&H0)
+                TopBackGlow = ReadFile(&H3)
+                TopStripes = ReadFile(&H6)
+                TopHeader = ReadFile(&H9)
+                TopText = ReadFile(&HC)
+                TopFooter = ReadFile(&HF)
+                TopLine = ReadFile(&H12)
+                '   Bottom Screen
+                ButtonText = ReadFile(&H15)
+                ButtonTextMask = ReadFile(&H18)
+                ButtonColor = ReadFile(&H1B)
+                ButtonGlow = ReadFile(&H1E)
+                BottomBack = ReadFile(&H21)
+                BottomBackGlow = ReadFile(&H24)
+                BottomStripes = ReadFile(&H27)
+                BottomMask = ReadFile(&H2A)
+                BottomText = ReadFile(&H2D)
+                BottomFooter = ReadFile(&H30)
+                BottomLine = ReadFile(&H33)
+
+                SetColors()
+            Else
+                MessageBox.Show("File selected is not a valid .slzt file!", "Invalid File!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+    End Sub
 
 
     '----------Functions Block----------
@@ -315,5 +352,41 @@ Public Class Form1
         fs.Dispose()
         Return hexout
     End Function
+
+    Public Function ReadFile(ByVal offset As Integer)
+        Dim hexout As String
+        Dim fs As New IO.FileStream(themefile, FileMode.Open, FileAccess.Read)
+        fs.Position = offset
+        For j As Integer = 0 To 5 Step 2
+            hexout &= Hex(fs.ReadByte()).ToString()
+        Next
+        fs.Close()
+        fs.Dispose()
+        Return hexout
+    End Function
+
+    'Resets color previews to new values
+    Public Sub SetColors()
+        '   Top Screen
+        clrTopBack.BackColor = StrToClr(TopBack)
+        clrTopBackGlow.BackColor = StrToClr(TopBackGlow)
+        clrTopStripes.BackColor = StrToClr(TopStripes)
+        clrTopHeader.BackColor = StrToClr(TopHeader)
+        clrTopText.BackColor = StrToClr(TopText)
+        clrTopFooter.BackColor = StrToClr(TopFooter)
+        clrTopLine.BackColor = StrToClr(TopLine)
+        '   Bottom Screen
+        clrButtonText.BackColor = StrToClr(ButtonText)
+        clrButtonTextMask.BackColor = StrToClr(ButtonTextMask)
+        clrButtonColor.BackColor = StrToClr(ButtonColor)
+        clrButtonGlow.BackColor = StrToClr(ButtonGlow)
+        clrBottomBack.BackColor = StrToClr(BottomBack)
+        clrBottomBackGlow.BackColor = StrToClr(BottomBackGlow)
+        clrBottomStripes.BackColor = StrToClr(BottomStripes)
+        clrBottomMask.BackColor = StrToClr(BottomMask)
+        clrBottomText.BackColor = StrToClr(BottomText)
+        clrBottomFooter.BackColor = StrToClr(BottomFooter)
+        clrBottomLine.BackColor = StrToClr(BottomLine)
+    End Sub
     '----------End Functions Block----------
 End Class
