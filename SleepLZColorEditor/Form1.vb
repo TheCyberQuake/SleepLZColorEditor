@@ -37,29 +37,39 @@ Public Class Form1
             'Make backup file
             My.Computer.FileSystem.CopyFile(editfile, editfile & ".bak", True)
 
-            'Read hex colors from file
-            '   Top Screen
-            TopBack = ReadColor(&H1CD4)
-            TopBackGlow = ReadColor(&H1CD8)
-            TopStripes = ReadColor(&H1CD0)
-            TopHeader = ReadColor(&H1D70)
-            TopText = ReadColor(&H1DA4)
-            TopFooter = ReadColor(&H1EA8)
-            TopLine = ReadColor(&H1E24)
-            '   Bottom Screen
-            ButtonText = ReadColor(&H14D4)
-            ButtonTextMask = ReadColor(&H14A0)
-            ButtonColor = ReadColor(&H132C)
-            ButtonGlow = ReadColor(&H1330)
-            BottomBack = ReadColor(&H1260)
-            BottomBackGlow = ReadColor(&H1264)
-            BottomStripes = ReadColor(&H125C)
-            BottomMask = ReadColor(&H150B)
-            BottomText = ReadColor(&H12FC)
-            BottomFooter = ReadColor(&H122C)
-            BottomLine = ReadColor(&H1554)
+            'check if the file is valid, if not throw error
+            Dim editfileInfo As New FileInfo(editfile)
+            If Convert.ToInt32(editfileInfo.Length) - 1 = Convert.ToInt32("3DA7", 16) And ReadColor(&H3DA5) = "040000" And ReadColor(&H41A) = "42746E" Then
+                'Make backup file
+                My.Computer.FileSystem.CopyFile(editfile, editfile & ".bak", True)
 
-            SetColors()
+                'Read hex colors from file
+                '   Top Screen
+                TopBack = ReadColor(&H1CD4)
+                TopBackGlow = ReadColor(&H1CD8)
+                TopStripes = ReadColor(&H1CD0)
+                TopHeader = ReadColor(&H1D70)
+                TopText = ReadColor(&H1DA4)
+                TopFooter = ReadColor(&H1EA8)
+                TopLine = ReadColor(&H1E24)
+                '   Bottom Screen
+                ButtonText = ReadColor(&H14D4)
+                ButtonTextMask = ReadColor(&H14A0)
+                ButtonColor = ReadColor(&H132C)
+                ButtonGlow = ReadColor(&H1330)
+                BottomBack = ReadColor(&H1260)
+                BottomBackGlow = ReadColor(&H1264)
+                BottomStripes = ReadColor(&H125C)
+                BottomMask = ReadColor(&H150B)
+                BottomText = ReadColor(&H12FC)
+                BottomFooter = ReadColor(&H122C)
+                BottomLine = ReadColor(&H1554)
+
+                SetColors()
+            Else
+                editfile = Nothing
+                MessageBox.Show("Invalid sleep_LZ.bin was selected! Did you decrypt the file?", "Invalid file!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
         End If
     End Sub
 
@@ -343,10 +353,16 @@ Public Class Form1
     'Read RGB hex color from offset in file
     Public Function ReadColor(ByVal offset As Integer)
         Dim hexout As String
+        Dim temphex As String
         Dim fs As New IO.FileStream(editfile, FileMode.Open, FileAccess.Read)
         fs.Position = offset
         For j As Integer = 0 To 5 Step 2
-            hexout &= Hex(fs.ReadByte()).ToString()
+            temphex = Hex(fs.ReadByte())
+            If Convert.ToInt32(temphex, 16) < 15 Then
+                hexout &= "0" & temphex
+            Else
+                hexout &= temphex
+            End If
         Next
         fs.Close()
         fs.Dispose()
@@ -355,10 +371,16 @@ Public Class Form1
 
     Public Function ReadFile(ByVal offset As Integer)
         Dim hexout As String
+        Dim temphex As String
         Dim fs As New IO.FileStream(themefile, FileMode.Open, FileAccess.Read)
         fs.Position = offset
         For j As Integer = 0 To 5 Step 2
-            hexout &= Hex(fs.ReadByte()).ToString()
+            temphex = Hex(fs.ReadByte())
+            If Convert.ToInt32(temphex, 16) < 15 Then
+                hexout &= "0" & temphex
+            Else
+                hexout &= temphex
+            End If
         Next
         fs.Close()
         fs.Dispose()
