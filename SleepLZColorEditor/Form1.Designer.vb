@@ -28,6 +28,7 @@ Partial Class Form1
         Me.btnWriteColors = New System.Windows.Forms.Button()
         Me.btnTopBack = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.clrTopLine = New System.Windows.Forms.Label()
@@ -67,7 +68,6 @@ Partial Class Form1
         Me.btnBottomBackGlow = New System.Windows.Forms.Button()
         Me.btnBottomBack = New System.Windows.Forms.Button()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.OpenThemeDialog = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -76,7 +76,7 @@ Partial Class Form1
         '
         'OpenFileDialog1
         '
-        Me.OpenFileDialog1.Filter = "Decompressed sleep_LZ|*.bin.bin"
+        Me.OpenFileDialog1.Filter = "Decompressed sleep_LZ|sleep.LZ"
         '
         'Button2
         '
@@ -84,7 +84,7 @@ Partial Class Form1
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(135, 23)
         Me.Button2.TabIndex = 2
-        Me.Button2.Text = "Open sleep_LZ.bin.bin"
+        Me.Button2.Text = "Open sleep.LZ"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'btnWriteColors
@@ -117,6 +117,15 @@ Partial Class Form1
         Me.GroupBox1.TabIndex = 7
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Main"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(6, 137)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(135, 23)
+        Me.Button1.TabIndex = 7
+        Me.Button1.Text = "Open Theme File"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'btnSave
         '
@@ -481,15 +490,6 @@ Partial Class Form1
         'SaveFileDialog1
         '
         Me.SaveFileDialog1.Filter = "Sleep_LZ Theme|*.slzt"
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(6, 137)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(135, 23)
-        Me.Button1.TabIndex = 7
-        Me.Button1.Text = "Open Theme File"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'OpenThemeDialog
         '

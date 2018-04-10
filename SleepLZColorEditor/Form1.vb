@@ -98,6 +98,7 @@ Public Class Form1
             WriteColor(&H12FC, BottomText)
             WriteColor(&H122C, BottomFooter)
             WriteColor(&H1554, BottomLine)
+            MessageBox.Show("Colors written to file", "Write Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
@@ -287,6 +288,7 @@ Public Class Form1
 
             fs.Close()
             fs.Dispose()
+            MessageBox.Show("Color theme file has been saved", "Save Successful", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
@@ -371,11 +373,10 @@ Public Class Form1
 
     Public Function ReadFile(ByVal offset As Integer)
         Dim hexout As String
-        Dim temphex As String
         Dim fs As New IO.FileStream(themefile, FileMode.Open, FileAccess.Read)
         fs.Position = offset
         For j As Integer = 0 To 5 Step 2
-            temphex = Hex(fs.ReadByte())
+            Dim temphex As String = Hex(fs.ReadByte())
             If Convert.ToInt32(temphex, 16) < 15 Then
                 hexout &= "0" & temphex
             Else
